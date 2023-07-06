@@ -12,7 +12,7 @@ In your `pubspec.yaml` add:
 dependencies:
   password_strength:
     git:
-      url: https://github.com/PixelBeardAgency/password_strength.git
+      url: https://github.com/brookesb91/password_strength.git
       ref: master # or a specific branch, tag or commit
 ```
 
