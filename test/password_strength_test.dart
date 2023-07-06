@@ -8,7 +8,9 @@ void main() {
       PasswordCriteria.lowercase(),
     ]);
 
-    final result = calculator.calculate('password');
+    calculator.calculate('password');
+
+    final result = calculator.strength;
     expect(result.score, 100, reason: 'The score should be 100.');
     expect(result.messages.length, 0,
         reason: 'No messages should be returned.');
@@ -19,7 +21,9 @@ void main() {
       PasswordCriteria.length(8),
     ]);
 
-    final result = calculator.calculate('password');
+    calculator.calculate('password');
+
+    final result = calculator.strength;
     expect(result.score, 100, reason: 'The score should be 100.');
     expect(result.messages.length, 0,
         reason: 'No messages should be returned.');
@@ -30,7 +34,9 @@ void main() {
       PasswordCriteria.uppercase(),
     ]);
 
-    final result = calculator.calculate('Password');
+    calculator.calculate('Password');
+
+    final result = calculator.strength;
     expect(result.score, 100, reason: 'The score should be 100.');
     expect(result.messages.length, 0,
         reason: 'No messages should be returned.');
@@ -41,7 +47,9 @@ void main() {
       PasswordCriteria.number(),
     ]);
 
-    final result = calculator.calculate('Password1');
+    calculator.calculate('Password1');
+
+    final result = calculator.strength;
     expect(result.score, 100, reason: 'The score should be 100.');
     expect(result.messages.length, 0,
         reason: 'No messages should be returned.');
@@ -54,7 +62,9 @@ void main() {
       PasswordCriteria.specialCharacter(),
     ]);
 
-    final result = calculator.calculate('Password!');
+    calculator.calculate('Password!');
+
+    final result = calculator.strength;
     expect(result.score, 100, reason: 'The score should be 100.');
     expect(result.messages.length, 0,
         reason: 'No messages should be returned.');
@@ -70,7 +80,10 @@ void main() {
       PasswordCriteria.specialCharacter(),
     ]);
 
-    final result = calculator.calculate('Password1!');
+    calculator.calculate('Password1!');
+
+    final result = calculator.strength;
+
     expect(result.score, 100, reason: 'The score should be 100.');
     expect(result.messages.length, 0,
         reason: 'No messages should be returned.');
@@ -86,7 +99,9 @@ void main() {
       PasswordCriteria.specialCharacter(),
     ]);
 
-    final result = calculator.calculate('Password1');
+    calculator.calculate('Password1');
+
+    final result = calculator.strength;
     expect(result.score, 80, reason: 'The score should be 80.');
     expect(result.messages.length, 1,
         reason: 'One message should be returned.');
@@ -102,7 +117,9 @@ void main() {
       PasswordCriteria.specialCharacter(),
     ]);
 
-    final result = calculator.calculate('Password');
+    calculator.calculate('Password');
+
+    final result = calculator.strength;
     expect(result.score, 60, reason: 'The score should be 60.');
     expect(result.messages.length, 2,
         reason: 'Two messages should be returned.');
@@ -118,7 +135,9 @@ void main() {
       PasswordCriteria.specialCharacter(),
     ]);
 
-    final result = calculator.calculate('password');
+    calculator.calculate('password');
+
+    final result = calculator.strength;
     expect(result.score, 40, reason: 'The score should be 40.');
     expect(result.messages.length, 3,
         reason: 'Three messages should be returned.');
@@ -134,7 +153,9 @@ void main() {
       PasswordCriteria.specialCharacter(),
     ]);
 
-    final result = calculator.calculate('shorty');
+    calculator.calculate('shorty');
+
+    final result = calculator.strength;
     expect(result.score, 20, reason: 'The score should be 20.');
     expect(result.messages.length, 4,
         reason: 'Four messages should be returned.');
