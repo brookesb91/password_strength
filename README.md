@@ -1,39 +1,95 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# password_strength
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
+A password strength calculator, validator & indicator for Flutter.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
+## Getting Started
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+In your `pubspec.yaml` add:
 
-## Features
+```yaml
+dependencies:
+  password_strength:
+    git:
+      url: https://github.com/PixelBeardAgency/password_strength.git
+      ref: master # or a specific branch, tag or commit
+```
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+To use this package,
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+```dart
+import 'package:password_strength/password_strength.dart'
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+A `PasswordStrengthCalculator` is used to calculate the strength of a password.
+
+It is constructed with any number of `PasswordCriteria` objects, which are used to determine the strength & validity of a password.
+
+A `PasswordIndicator` is a widget that displays the strength of a password. It is constructed with a `PasswordStrengthCalculator` and displays the strength along with any validation messages each time the `calculate` method is called.
+
+### Simple Example
 
 ```dart
-const like = 'sample';
+class MyHomePage extends StatelessWidget {
+  /// Create a password strength calculator with the following criteria:
+  final PasswordStrengthCalculator _calculator = PasswordStrengthCalculator([
+
+    /// Password must be at least 8 characters long.
+    PasswordCriteria.length(8),
+
+    /// Password must contain an uppercase letter.
+    PasswordCriteria.uppercase(),
+
+    /// Password must contain a lowercase letter.
+    PasswordCriteria.lowercase(),
+
+    /// Password must contain a number.
+    PasswordCriteria.number(),
+
+    /// Password must contain a special character.
+    PasswordCriteria.specialCharacter(),
+
+    /// Password cannot contain more than 2 sequential characters.
+    PasswordCriteria.sequentialCharacters(),
+
+    /// Custom criteria can be defined as follows.
+    ///
+    /// Password cannot contain the phrase password.
+    PasswordCriteria(
+        'Password cannot contain the phrase password.',
+        (password) =>
+            !password.contains(RegExp(r'password', caseSensitive: false)))
+  ]);
+
+  MyHomePage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Choose a password',
+                ),
+
+                /// Calculate the strength of the password each time the text changes.
+                onChanged: (value) => _calculator.calculate(value),
+              ),
+              const SizedBox(height: 16),
+
+              /// Display the strength of the password.
+              PasswordStrengthIndicator(calculator: _calculator),
+            ],
+          ),
+        ),
+    );
+  }
+}
+
 ```
-
-## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
