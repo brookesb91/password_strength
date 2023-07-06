@@ -1,10 +1,9 @@
-
 class PasswordCriteria {
   /// The message to display if the criteria is not met.
   final String message;
 
   /// The test to run to determine if the criteria is met.
-  final bool Function(String) _test;
+  final bool Function(String password) _test;
 
   const PasswordCriteria(this.message, this._test);
 

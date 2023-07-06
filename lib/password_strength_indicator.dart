@@ -4,6 +4,7 @@ import 'package:password_strength/password_strength_calculator.dart';
 class PasswordStrengthIndicator extends StatelessWidget {
   final List<Color> colors;
   final PasswordStrengthCalculator calculator;
+  final TextStyle? style;
 
   PasswordStrengthIndicator({
     super.key,
@@ -14,6 +15,7 @@ class PasswordStrengthIndicator extends StatelessWidget {
       Colors.yellow,
       Colors.green,
     ],
+    this.style,
   }) : assert(colors.isNotEmpty, 'Colors must not be empty.');
 
   @override
@@ -33,7 +35,10 @@ class PasswordStrengthIndicator extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             for (final message in calculator.strength.messages)
-              Text(message, style: Theme.of(context).textTheme.labelMedium)
+              Text(
+                message,
+                style: style ?? Theme.of(context).textTheme.labelMedium,
+              )
           ],
         );
       },
