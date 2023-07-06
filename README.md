@@ -2,6 +2,8 @@
 
 A password strength calculator, validator & indicator for Flutter.
 
+![Demo](images/demo.gif)
+
 ## Getting Started
 
 In your `pubspec.yaml` add:
